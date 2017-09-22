@@ -5,10 +5,17 @@
 #include <utils/memutils.h>
 #include <utils/hsearch.h>
 
+#undef FLEXIBLE_ARRAY_MEMBER
+#ifdef _WIN32
+#define FLEXIBLE_ARRAY_MEMBER 1
+#else
+#define FLEXIBLE_ARRAY_MEMBER 0
+#endif
+
 typedef struct CacheQuery
 {
 	void	   *result;
-	void	   *data[0];
+	void	   *data[FLEXIBLE_ARRAY_MEMBER];
 } CacheQuery;
 
 typedef struct CacheStats

@@ -2,7 +2,14 @@
 #include <string.h>
 #include "fmgr.h"
 
+#ifndef EXT_GIT_COMMIT
+// Windows build does not use Makefile so we define it here to remove VS compile error
+#define EXT_GIT_COMMIT "windows"
+#endif
+
 const char *git_commit = EXT_GIT_COMMIT;
+
+PGDLLEXPORT Datum get_git_commit(PG_FUNCTION_ARGS);
 
 PG_FUNCTION_INFO_V1(get_git_commit);
 
